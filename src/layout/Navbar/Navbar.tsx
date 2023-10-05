@@ -1,19 +1,17 @@
-import { Layout, Menu } from 'antd';
-import { navItems } from './constants';
+import { Menu } from 'antd';
+import { Link } from 'react-router-dom';
 import './navbar.scss'
-
-const { Header } = Layout;
 
 const Navbar = () => {
     return (
-        <Header className='header'>
-            <Menu
-                theme="dark"
-                mode="horizontal"
-                defaultSelectedKeys={['home']}
-                items={navItems}
-            />
-        </Header>
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']} className='header'>
+            <Menu.Item key="home">
+                <Link to="/">Home</Link>
+            </Menu.Item>
+            <Menu.Item key="units">
+                <Link to="/units">Units</Link>
+            </Menu.Item>
+        </Menu>
     )
 }
 
