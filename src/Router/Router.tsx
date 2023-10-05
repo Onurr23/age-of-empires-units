@@ -1,14 +1,15 @@
-import { Routes, Route, Link, NavLink } from "react-router-dom"
-import Home from "../Pages/Home"
-import Units from "../Pages/Units"
-import UnitDetail from "../Pages/UnitDetail"
+import { Routes, Route } from "react-router-dom"
+import Home from "../pages/Home"
+import Units from "../pages/Units/Units"
+import UnitDetail from "../pages/UnitDetail/UnitDetail"
 
 const Router: React.FC = () => {
     return (
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/units' element={<Units />} />
-            <Route path='/unit-detail' element={<UnitDetail />} />
+            <Route path='units/detail/:id' element={<UnitDetail />} />
+            <Route path='*' element={<div>NOT FOUND</div>} />
         </Routes>
     )
 }
