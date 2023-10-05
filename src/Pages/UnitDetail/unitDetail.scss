@@ -1,0 +1,19 @@
+@import '../../sass/variables';
+
+.ant-card {
+    margin: 20px; 
+    width: 450px;
+  }
+  
+  .ant-card-head-title {
+    color:$primaryColor;
+  }
+  
+  p {
+      color:$primaryColor;
+    strong {
+    margin-right: 5px;
+    font-weight: bold;
+  }
+}
+  
