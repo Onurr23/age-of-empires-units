@@ -2,14 +2,19 @@
 import { Checkbox, Slider, Button, Table } from "antd";
 import "./units.scss";
 import { useEffect, useState } from "react";
-import { AgeFilterData, COSTS, CostFilterData } from "./units.types";
+import { AgeFilterData, COSTS, CostFilterData, UnitsReducer } from "./units.types";
 import data from "../../db/age-of-empires-units.json";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUnitsRequest } from "../../store/unitsData/unitsDataActions";
 
 const { Column } = Table;
 
 const Units = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const units = useSelector((state: UnitsReducer) => state?.unitsReducer.units.data);
+    const { loading } = useSelector((state: UnitsReducer) => state?.unitsReducer.units);
     const [costsFilterData, setCostsFilterData] = useState<CostFilterData[]>([
         {
             label: "Wood",
@@ -30,6 +35,7 @@ const Units = () => {
             checked: false,
         },
     ]);
+
     const [ageFilterData, setAgeFilterData] = useState<AgeFilterData[]>([
         { key: "all", label: "All", isSelected: true },
         { key: "dark", label: "Dark", isSelected: false },
@@ -37,7 +43,11 @@ const Units = () => {
         { key: "castle", label: "Castle", isSelected: false },
         { key: "imperial", label: "Imperial", isSelected: false },
     ]);
-    const [unitsData, setUnitsData] = useState<any[]>(data!.units);
+    const [unitsData, setUnitsData] = useState<any[]>(units);
+
+    useEffect(() => {
+        dispatch(getUnitsRequest());
+    }, [])
 
     useEffect(() => {
         filterUnits();
@@ -111,17 +121,10 @@ const Units = () => {
                 }));
             }
         } else {
-            console.log("NOT ALL", ageFilters[selectedIndex].isSelected);
             if (!ageFilters[selectedIndex].isSelected) {
                 ageFilters[0].isSelected = false;
             } else {
-                console.log("OK", ageFilters);
-                console.log(
-                    "OK",
-                    ageFilters.every((filter: AgeFilterData) => filter.isSelected)
-                );
                 if (ageFilters.every((filter: AgeFilterData) => !filter.isSelected)) {
-                    console.log("ALL");
                     ageFilters[0].isSelected = true;
                 }
             }
@@ -187,6 +190,7 @@ const Units = () => {
             </div>
             <div className="tableContainer">
                 <Table
+                    loading={loading}
                     className="table"
                     onRow={(record, rowIndex) => {
                         return {

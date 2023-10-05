@@ -18,6 +18,16 @@ export interface CostData {
     Gold: number;
 }
 
+export interface UnitsReducer {
+    unitsReducer: {
+        units: {
+            data: CostFilterData[];
+            loading: boolean;
+        };
+    };
+}
+
+
 // export interface UnitData {
 //     age: string;
 //     armor: string;
