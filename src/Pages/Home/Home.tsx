@@ -1,9 +1,9 @@
 import { Image } from 'antd';
-import './home.scss';  // CSS dosyasını import et
+import './home.scss';
 
 const Home = () => {
     return (
-        <div className="image-container"> {/* CSS sınıfını uygula */}
+        <div className="image-container">
             <Image
                 src={require('../../assets/aoe-wp.jpg')}
                 alt="image"
