@@ -128,8 +128,12 @@ const Units = () => {
                 }
             }
         }
-        ageFilters[selectedIndex].isSelected =
-            !ageFilters[selectedIndex].isSelected;
+        if (selectedIndex === 0 && ageFilters.filter((filter: AgeFilterData) => filter.isSelected).length === 1) {
+            ageFilters[0].isSelected = true;
+        } else {
+            ageFilters[selectedIndex].isSelected =
+                !ageFilters[selectedIndex].isSelected;
+        }
         setAgeFilterData(ageFilters);
     };
 
