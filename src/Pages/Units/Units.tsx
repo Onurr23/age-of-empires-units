@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Checkbox, Slider, Button, Table } from "antd";
 import "./units.scss";
 import { useEffect, useState } from "react";
@@ -124,7 +123,7 @@ const Units = () => {
             if (!ageFilters[selectedIndex].isSelected) {
                 ageFilters[0].isSelected = false;
             } else {
-                if (ageFilters.every((filter: AgeFilterData) => !filter.isSelected)) {
+                if (ageFilters.filter((filter: AgeFilterData) => filter.isSelected).length === 1) {
                     ageFilters[0].isSelected = true;
                 }
             }
@@ -193,9 +192,9 @@ const Units = () => {
                 <Table
                     loading={loading}
                     className="table"
-                    onRow={(record, rowIndex) => {
+                    onRow={(record) => {
                         return {
-                            onClick: (event) => {
+                            onClick: () => {
                                 navigate(`/units/detail/${record.id}`, {
                                     state: { data: record },
                                 });
