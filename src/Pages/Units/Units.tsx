@@ -14,7 +14,7 @@ const Units = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const units = useSelector((state: UnitsReducer) => state?.unitsReducer.units.data);
-    const { loading } = useSelector((state: UnitsReducer) => state?.unitsReducer.units);
+    const loading = useSelector((state: UnitsReducer) => state?.unitsReducer.units.loading);
     const [costsFilterData, setCostsFilterData] = useState<CostFilterData[]>([
         {
             label: "Wood",
@@ -150,6 +150,7 @@ const Units = () => {
                 <h2>Ages</h2>
                 {ageFilterData.map((filter: AgeFilterData) => (
                     <Button
+                        key={filter.key}
                         onClick={() => onAgesFilterChange(filter.key)}
                         type={filter.isSelected ? "primary" : "default"}
                     >
@@ -160,7 +161,7 @@ const Units = () => {
             <div className="costsFilterContainer">
                 <h2>Costs</h2>
                 {costsFilterData.map((filter: CostFilterData, index: number) => (
-                    <div className="costFilter">
+                    <div key={filter.key} className="costFilter">
                         <Checkbox
                             checked={filter.checked}
                             onChange={(e) =>
