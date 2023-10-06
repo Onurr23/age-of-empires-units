@@ -17,7 +17,7 @@ const UnitDetail = () => {
         hit_points,
         reload_time
     } = data;
-    console.log(data);
+
     return (
         <Card title={`Detail for : ${name}`}>
             <div data-testid="id">
